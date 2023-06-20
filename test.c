@@ -27,13 +27,13 @@ int main(void)
     nodelay(stdscr,TRUE);
     curs_set(0);
     
-    fb_init(COLS,LINES);
-    vec2 points[3] = {{0.5,-0.5},{-0.5,-0.5},{0.0,0.5}};
+    fb_init(40,20);
+    vec2 points[3] = {{1,-1},{-1,-1},{0.0,1}};
 
     do{
-        fb_clear(' ');
+        fb_clear('_');
         rast_triangle(points[0],points[1],points[2]);
-        fb_push(0,0);
+        fb_push(COLS/2 - 20,LINES/2-10);
         rotate_points(points, i);
         
     }while(getch() != 'q');

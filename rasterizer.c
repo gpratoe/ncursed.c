@@ -36,23 +36,23 @@ void rast_triangle(const vec2 v1,const vec2 v2,const vec2 v3) // vertices have t
     vec2 vr2 = v2create(v2.x*h_width + h_width,-(v2.y)*h_height + h_height);
     vec2 vr3 = v2create(v3.x*h_width + h_width,-(v3.y)*h_height + h_height);
 
-    int x_min = (int)floor(MIN(MIN(vr1.x,vr2.x),vr3.x));
-    int y_min = (int)floor(MIN(MIN(vr1.y,vr2.y),vr3.y));
-    int x_max = (int)ceil(MAX(MAX(vr1.x,vr2.x),vr3.x));
-    int y_max = (int)ceil(MAX(MAX(vr1.y,vr2.y),vr3.y));
+    int x_min = (int)MAX(0,floor(MIN(MIN(vr1.x,vr2.x),vr3.x)));
+    int y_min = (int)MAX(0,floor(MIN(MIN(vr1.y,vr2.y),vr3.y)));
+    int x_max = (int)MIN(h_width*2,ceil(MAX(MAX(vr1.x,vr2.x),vr3.x)));
+    int y_max = (int)MIN(h_height*2,ceil(MAX(MAX(vr1.y,vr2.y),vr3.y)));
 
     vec2 p;
 
-    for (int j = y_min; j <= y_max; j++)
+    for (int j = y_min; j < y_max; j++)
     {
-        for (int i = x_min; i <= x_max; i++)
+        for (int i = x_min; i < x_max; i++)
         {
             p = v2create(i,j);
-            if(is_in_triangle(p,vr1,vr2,vr3))
+            if(is_in_triangle(p,vr1,vr2,vr3)) 
             {
                 set_pixel(i,j,'#');
             }
-            // else set_pixel(i,j,'.');
+            else set_pixel(i,j,'.');
         }
     }
 }
