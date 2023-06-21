@@ -187,3 +187,67 @@ float v2angle(vec2 v1, vec2 v2)
 
     return (float)acos((double)point /(v1m*v2m));
 }
+
+vec2 v3tov2(vec3 v)
+{
+    vec2 vec = {v.x,v.y};
+    return vec;
+}
+
+
+vec4 v4create(float x, float y, float z, float w)
+{
+    vec4 ret = {x,y,z,w};
+    return ret;
+}
+
+float v4mag(vec4 v)
+{
+    return sqrtf(v.x*v.x + v.y*v.y + v.z*v.z + v.w*v.w);
+}
+
+vec4 v4add(vec4 v1, vec4 v2)
+{
+    vec4 ret = {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z, v1.w + v2.w};
+    return ret;
+}
+
+vec4 v4sub(vec4 v1, vec4 v2)
+{
+    vec4 ret = {v1.x - v2.x, v1.y - v2.y, v1.z - v2.z, v1.w - v2.w};
+    return ret;
+}
+
+vec4 v4mul(vec4 v1, vec4 v2)
+{
+    vec4 ret = {v1.x * v2.x, v1.y * v2.y, v1.z * v2.z, v1.w * v2.w};
+    return ret;   
+}
+
+vec4 v4scale(vec4 v, float k)
+{
+    vec4 ret = {v.x * k, v.y * k, v.z * k, v.w * k};
+    return ret;
+}
+
+vec4 v4normalize(vec4 v)
+{
+    vec4 ret = v4scale(v,1/v4mag(v));
+    return ret;
+}
+
+vec4 v4negate(vec4 v)
+{
+    return v4scale(v,-1);
+}
+
+float v4dot(vec4 v1, vec4 v2)
+{
+    return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z + v1.w*v2.w;
+}
+
+vec3 v4tov3(vec4 v)
+{
+    vec3 ret = {v.x,v.y,v.z};
+    return ret;
+}

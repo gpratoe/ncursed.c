@@ -11,6 +11,11 @@ typedef struct vec3_t
     float x,y,z;
 }vec3;
 
+typedef struct vec4_t
+{
+    float x,y,z,w;
+}vec4;
+
 /**
  * @brief Creates a new vec3.
  * 
@@ -211,4 +216,92 @@ float v2angle(vec2 v1, vec2 v2);
  * @return float 
  */
 float v2mag(vec2 v);
+
+vec2 v3tov2(vec3 v);
+
+/*VECTOR 4*/
+
+/**
+ * @brief Creates a new vec4.
+ * 
+ * @param x x component
+ * @param y y component
+ * @param z z component
+ * @param w w component
+ *  
+ * @return vec4 
+ */
+vec4 v4create(float x, float y, float z, float w);
+
+/**
+ * @brief Adds two vectors.
+ * 
+ * @param v1 First vector.
+ * @param v2 Second vector.
+ * @return vec4 
+ */
+vec4 v4add(vec4 v1, vec4 v2);
+
+/**
+ * @brief Substracts two vectors.
+ * 
+ * @param v1 First vector.
+ * @param v2 Second vector.
+ * @return vec4 
+ */
+vec4 v4sub(vec4 v1, vec4 v2);
+
+/**
+ * @brief Multiplies v1 by v1, coordenate to coordenate.
+ * 
+ * @param v1 
+ * @param v2 
+ * @return vec4 
+ */
+vec4 v4mul(vec4 v1, vec4 v2);
+
+/**
+ * @brief Scales the vector by a magnitud of k.
+ * 
+ * @param v Vector.
+ * @param k Magnitud.
+ * @return vec4 
+ */
+vec4 v4scale(vec4 v, float k);
+
+/**
+ * @brief Normalizes a vector.
+ * 
+ * @param v Vector.
+ * @return vec4 
+ */
+vec4 v4normalize(vec4 v);
+
+/**
+ * @brief Returns the vector with its components negated.
+ * 
+ * @param v Vector.
+ * @return vec4 
+ */
+vec4 v4negate(vec4 v);
+
+/**
+ * @brief Returns the dot product between the two vectors.
+ * 
+ * @param v1 First vector.
+ * @param v2 Second vector.
+ * @return float 
+ */
+float v4dot(vec4 v1, vec4 v2);
+
+/**
+ * @brief Returns the magnitud (or length) of the vector.
+ * 
+ * @param v Vector.
+ * @return float 
+ */
+float v4mag(vec4 v);
+
+vec3 v4tov3(vec4 v);
+
 #endif //VECTOR_H_

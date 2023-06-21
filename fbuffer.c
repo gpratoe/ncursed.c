@@ -8,33 +8,41 @@
 
 typedef struct fb_t
 {
-    unsigned char *buff_1;
-    unsigned char *buff_2;
+    unsigned char *buff[2];
     int width;
     int height;
 
 }framebuffer;
 
 framebuffer fb;
+unsigned int r_buff, p_buff;
 
 void fb_init(int WIDTH, int HEIGHT)
 {
-    fb.buff_1 = calloc((WIDTH*HEIGHT)+1,sizeof(unsigned char));
-    fb.buff_2 = calloc((WIDTH*HEIGHT)+1,sizeof(unsigned char));
+    fb.buff[0] = calloc((WIDTH*HEIGHT)+1,sizeof(unsigned char));
+    fb.buff[1] = calloc((WIDTH*HEIGHT)+1,sizeof(unsigned char));
     fb.width = WIDTH;
     fb.height = HEIGHT;
+    r_buff = 0;
+    p_buff = 1;
+    memset(fb.buff[0],'\0',WIDTH*HEIGHT);
+    memset(fb.buff[1],'\0',WIDTH*HEIGHT);
+}
 
-    memset(fb.buff_1,'\0',fb.width*fb.height+1);
+void fb_swap()
+{
+    r_buff = !r_buff;
+    p_buff = !p_buff;
 }
 
 void fb_clear(unsigned char color)
 {
-    memset(fb.buff_1,color,fb.width*fb.height+1);
+    memset(fb.buff[r_buff],color,fb.width*fb.height);
 }
 
 void set_pixel(int x, int y, unsigned char color)
 {
-    fb.buff_1[(y * fb.width + x)] = color;
+    fb.buff[r_buff][(y * fb.width + x)] = color;
 }
 
 void fb_push(int off_x, int off_y)
@@ -48,7 +56,7 @@ void fb_push(int off_x, int off_y)
         {
             int index = (j-off_y)*fb.width + (i-off_x);
             
-            unsigned char color = fb.buff_1[index];
+            unsigned char color = fb.buff[p_buff][index];
             
             mvaddch(j,i,color);
         }
@@ -68,6 +76,6 @@ int fb_height()
 
 void fb_destroy()
 {
-    free(fb.buff_1);
-    free(fb.buff_2);
+    free(fb.buff[0]);
+    free(fb.buff[1]);
 }

@@ -2,40 +2,45 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <math.h>
+#include <unistd.h>
 
 #include "include/vector.h"
 #include "include/rasterizer.h"
 #include "include/fbuffer.h"
+#include "include/quaternion.h"
 
-void rotate_points(vec2 p[3], float angle)
+#define PI 3.141592
+
+void rotate_points(vec3 points[3], quat rotation)
 {
-    for (int i = 0; i < 3; i++)
+    for (int j = 0; j < 3; j++)
     {
-        float x = p[i].x;
-        float y = p[i].y;
-        p[i].x = cosf(angle) * x - sinf(angle) * y;
-        p[i].y = sinf(angle) * x + cosf(angle) * y;
+        points[j] = qrotate_vec(points[j],rotation);
     }
 }
 
 int main(void)
 {
-    float i = 0.0001;
     initscr();
     noecho();
     cbreak();
     nodelay(stdscr,TRUE);
     curs_set(0);
-    
-    fb_init(40,20);
-    vec2 points[3] = {{1,-1},{-1,-1},{0.0,1}};
+    fb_init(COLS,LINES);
 
-    do{
-        fb_clear('_');
-        rast_triangle(points[0],points[1],points[2]);
-        fb_push(COLS/2 - 20,LINES/2-10);
-        rotate_points(points, i);
+    vec3 points[3] = {{-0.5,0.5,0},{0.5,0.5,0},{0,-0.5,0}};
         
+    quat rotation = qcreate_rotation(0.01,1,0,1);
+    
+    do{
+        fb_clear(' ');
+        rast_triangle(v3tov2(points[0]),v3tov2(points[1]),v3tov2(points[2]));
+        fb_push(0,0);
+        fb_swap();
+
+        rotate_points(points, rotation);
+
+        usleep(10000);
     }while(getch() != 'q');
     
     fb_destroy();

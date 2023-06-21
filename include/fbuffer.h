@@ -3,6 +3,8 @@
 
 void fb_init(int WIDTH, int HEIGHT);
 
+void fb_swap();
+
 void set_pixel(int x, int y, unsigned char color);
 
 void fb_push(int off_x, int off_y);
