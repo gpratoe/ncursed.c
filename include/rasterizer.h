@@ -5,6 +5,6 @@
 
 void init_fb(int WIDTH, int HEIGHT);
 
-void rast_triangle(vec2 v1, vec2 v2, vec2 v3);
+void rast_triangle(vec3 v1, vec3 v2, vec3 v3, unsigned char color);
 
 #endif //RASTERIZER_H_

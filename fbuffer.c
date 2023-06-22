@@ -4,8 +4,6 @@
 
 #include "include/fbuffer.h"
 
-//TODO: Double buffering
-
 typedef struct fb_t
 {
     unsigned char *buff[2];
@@ -25,8 +23,8 @@ void fb_init(int WIDTH, int HEIGHT)
     fb.height = HEIGHT;
     r_buff = 0;
     p_buff = 1;
-    memset(fb.buff[0],'\0',WIDTH*HEIGHT);
-    memset(fb.buff[1],'\0',WIDTH*HEIGHT);
+    memset(fb.buff[0],' ',WIDTH*HEIGHT);
+    memset(fb.buff[1],' ',WIDTH*HEIGHT);
 }
 
 void fb_swap()

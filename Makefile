@@ -1,7 +1,7 @@
 LIBS=-lm -lncurses -lpthread
 FLAGS=-g 
 CC=gcc
-FILES=test.c rasterizer.c vector.c fbuffer.c quaternion.c
+FILES=test.c rasterizer.c vector.c fbuffer.c quaternion.c matrix4.c camera.c
 all:
 	$(CC) $(FILES) $(LIBS) $(FLAGS)
 

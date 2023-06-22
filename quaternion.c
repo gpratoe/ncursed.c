@@ -57,3 +57,16 @@ vec3 qrotate_vec(vec3 v, quat q)
 
     return ret;
 }
+
+vec4 qrotate_vec4(vec4 v, quat q)
+{
+    vec4 ret;
+    quat vtoq = qcreate(0,v.x,v.y,v.z);
+    quat conjugate = qconjugate(q);
+    quat res = qmul(q, qmul(vtoq, conjugate));
+    ret.x = res.x;
+    ret.y = res.y;
+    ret.z = res.z;
+
+    return ret;
+}

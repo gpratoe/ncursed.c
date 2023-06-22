@@ -25,6 +25,8 @@ quat qinverse(quat q);
 
 quat qcreate_rotation(float angle, float x, float y, float z);
 
-vec3 qrotate_vec(vec3 v, quat q);
+vec3 qrotate_vec3(vec3 v, quat q);
+
+vec4 qrotate_vec4(vec4 v, quat q);
 
 #endif //QUATERNION_H_

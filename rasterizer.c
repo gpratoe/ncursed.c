@@ -26,11 +26,11 @@ bool is_in_triangle(vec2 p, vec2 p1, vec2 p2, vec2 p3)
     v2 = v2sub(p,p3);
     float w2 = v2cross(v1,v2);
 
-    return (w0 < 0.1 && w1 < 0.1 && w2 < 0.1) || (w0 > 0.1 && w1 > 0.1 && w2 > 0.1); // check for same sign to account for all sides of the triangle
+    return (w0 < 0.1 && w1 < 0.1 && w2 < 0.1) || (w0 > -0.1 && w1 > -0.1 && w2 > -0.1); // check for same sign to account for all sides of the triangle
 }
 
 
-void rast_triangle(const vec2 v1,const vec2 v2,const vec2 v3) // vertices have to be in clockwise order
+void rast_triangle(const vec3 v1,const vec3 v2,const vec3 v3, unsigned char color) // vertices have to be in clockwise order
 {
     int h_width = fb_width()/2;
     int h_height = fb_height()/2;
@@ -45,14 +45,14 @@ void rast_triangle(const vec2 v1,const vec2 v2,const vec2 v3) // vertices have t
 
     vec2 p;
 
-    for (int j = y_min; j <= y_max; j++)
+    for (int j = y_min; j < y_max; j++)
     {
         for (int i = x_min; i < x_max; i++)
         {
             p = v2create(i,j);
             if(is_in_triangle(p,vr1,vr2,vr3)) 
             {
-                set_pixel(i,j,'$');
+                set_pixel(i,j,color);
             }
             //else set_pixel(i,j,'.');
         }
