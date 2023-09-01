@@ -236,4 +236,3 @@ m44 m4translate(m44 a, vec3 v)
 
     return a;
 }
-

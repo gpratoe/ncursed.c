@@ -45,7 +45,7 @@ quat qcreate_rotation(float angle, float x, float y, float z)
     return ret;
 }
 
-vec3 qrotate_vec(vec3 v, quat q)
+vec3 qrotate_vec3(vec3 v, quat q)
 {
     vec3 ret;
     quat vtoq = qcreate(0,v.x,v.y,v.z);

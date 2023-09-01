@@ -19,4 +19,8 @@ m44 cam_get_view(camera cam);
 
 m44 cam_get_proj(camera cam);
 
+void cam_destroy(camera cam);
+
+vec3 cam_get_pos(camera cam);
+
 #endif //CAMERA_H_

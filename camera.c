@@ -47,9 +47,9 @@ void cam_rotate(camera cam, vec3 up, vec3 right, vec3 forward)
 void cam_set_view(camera cam)
 {
     cam->translation = m4identity();
-    cam->translation.m30 = -cam->position.x;
-    cam->translation.m31 = -cam->position.y;    
-    cam->translation.m32 = -cam->position.z;
+    cam->translation.m30 = cam->position.x;
+    cam->translation.m31 = cam->position.y;
+    cam->translation.m32 = cam->position.z;
     cam->rotation = m4identity();
     cam->rotation.m00 = cam->right.x;
     cam->rotation.m01 = cam->up.x;
@@ -81,4 +81,15 @@ m44 cam_get_view(camera cam)
 m44 cam_get_proj(camera cam)
 {
     return cam->proj;
+}
+
+void cam_destroy(camera cam)
+{
+    free(cam);
+    cam = NULL;
+}
+
+vec3 cam_get_pos(camera cam)
+{
+    return cam->position;
 }
