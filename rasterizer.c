@@ -37,7 +37,7 @@ bool is_in_triangle(vec2 p, vec2 p1, vec2 p2, vec2 p3)
 }
 
 
-void rast_triangle(const vec3 v1,const vec3 v2,const vec3 v3) // vertices have to be in clockwise order
+void rast_triangle(const vec3 v1,const vec3 v2,const vec3 v3) // vertices must be in clockwise order
 {
     int h_width = fb_width()/2;
     int h_height = fb_height()/2;
